@@ -126,6 +126,20 @@ class Searchonmap extends Controller
 
 		$price_from = "";
 		$price_to = "";
+
+		if(
+			!isset($_SESSION["_GEL_"]) || 
+			!isset($_SESSION["_RUB_"]) || 
+			!isset($_SESSION["_USD_"])  
+		){
+			$currencymod = new Database('currencymod', array(
+				"method"=>"select"
+			));
+			$fetchCur = $currencymod->getter();
+			$_SESSION["_GEL_"] = 1;
+			$_SESSION["_RUB_"] = $fetchCur[0]["value"] / 100;
+			$_SESSION["_USD_"] = $fetchCur[1]["value"] ;
+		}
 		
 		if(isset($_SESSION["query"]["price_from"])){
 			if($_SESSION['currency']=="gel"){

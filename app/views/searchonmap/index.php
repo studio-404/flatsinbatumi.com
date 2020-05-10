@@ -128,7 +128,9 @@ echo $data['headertop'];
               </div>
 
               <div id="results">
-                <div id="map" style="width: 100%; height: 450px;"></div>
+                <div id="map" style="width: 100%; height: 450px; text-align: center;">
+                  <img src="/public/img/loading.gif" alt="" width="50" height="50" style="margin: 175px auto" />
+                </div>
               </div>
 
             </section>
@@ -314,7 +316,13 @@ function initMap() {
 
 
 </script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=<?=Config::GOOGLE_MAP_KEY?>&amp;callback=initMap"></script>
-
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=<?=Config::GOOGLE_MAP_KEY?>"></script>
+<script>
+  (function(){
+    setTimeout(function(){
+      initMap();
+    }, 500);
+  })();
+</script>
 
 <?=$data['footer']?>
