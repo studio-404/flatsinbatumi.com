@@ -1730,6 +1730,7 @@ var formCatalogAdd = function(catalogId, lang){
 	var orderid = $("#orderid").val();
 	var title = $("#title").val();
 	var saleType = $("#saleType").val();
+	var cities = $("#cities").val();
 	var rooms = $("#rooms").val();
 	var type = $("#type").val();
 	var price = $("#price").val();
@@ -1782,6 +1783,7 @@ var formCatalogAdd = function(catalogId, lang){
 			orderid:orderid,
 			title:title, 
 			saleType:saleType, 
+			cities:cities, 
 			rooms:rooms, 
 			type:type, 
 			price:price, 
@@ -1891,6 +1893,7 @@ var formCatalogEdit = function(idx, lang){
 	var orderid = $("#orderid").val();
 	var title = $("#title").val();
 	var saleType = $("#saleType").val();
+	var cities = $("#cities").val();
 	var rooms = $("#rooms").val();
 	var type = $("#type").val();
 	var price = $("#price").val();
@@ -1944,6 +1947,7 @@ var formCatalogEdit = function(idx, lang){
 			orderid:orderid,
 			title:title, 
 			saleType:saleType, 
+			cities:cities, 
 			rooms:rooms, 
 			type:type, 
 			price:price, 

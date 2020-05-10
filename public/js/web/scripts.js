@@ -110,13 +110,14 @@ $(document).on("click", ".searchButton", function(){
 	var pn = parseInt(1);
 	var itemPerPage = $("#itemPerPage").val();
 	var fsale_type = parseInt($("#fsale_type").val());
+	var cities = parseInt($("#cities").val());
 	var frooms = parseInt($("#frooms").val());
 	var ftype = parseInt($("#ftype").val());
 	var fprice_from = parseInt($("#fprice_from").val());
 	var fprice_to = parseInt($("#fprice_to").val());
 	var forderby = $("#forderby").val();
 
-	var state = '?price_from='+fprice_from+'&price_to='+fprice_to+'&rooms='+frooms+'&sale_type='+fsale_type+'&type='+ftype+'&orderby='+forderby;
+	var state = '?price_from='+fprice_from+'&price_to='+fprice_to+'&rooms='+frooms+'&sale_type='+fsale_type+'&cities='+cities+'&type='+ftype+'&orderby='+forderby;
 	window.history.pushState({urlPath:'/'},"", state);
 
 	var html = "";
@@ -132,6 +133,7 @@ $(document).on("click", ".searchButton", function(){
 			pn: pn, 
 			itemPerPage: itemPerPage, 
 			fsale_type: fsale_type,  
+			cities: cities,  
 			frooms: frooms,  
 			ftype: ftype,  
 			fprice_from: fprice_from,  

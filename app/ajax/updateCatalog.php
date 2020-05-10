@@ -30,6 +30,7 @@ class updateCatalog
 		$orderid = functions\request::index("POST","orderid");
 		$title = functions\request::index("POST","title");
 		$saleType = functions\request::index("POST","saleType");
+		$cities = functions\request::index("POST","cities");
 		$rooms = functions\request::index("POST","rooms");
 		$type = functions\request::index("POST","type");
 		$price = functions\request::index("POST","price");
@@ -53,6 +54,7 @@ class updateCatalog
 			'orderid'=>$orderid, 
 			'title'=>$title, 
 			'sale_type'=>$saleType, 
+			'cities'=>$cities, 
 			'rooms'=>$rooms, 
 			'type'=>$type, 
 			'price'=>$price, 

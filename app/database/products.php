@@ -141,12 +141,14 @@ class products
 		require_once("app/functions/request.php"); 
 
 		$sale_type = '';
+		$cities = '';
 		$rooms = '';
 		$type = '';
 		$price = '';
 		$forderby = "CAST(`products`.`orderid` as SIGNED) ASC";
 		$forderby_json = "SIGNED_ASC";
 		$sale_type_json = '';
+		$cities_json = '';
 		$rooms_json = '';
 		$type_json = '';
 		$price_json = '';
@@ -154,6 +156,11 @@ class products
 		if(isset($args["sale_type"]) && is_numeric($args["sale_type"])){
 			$sale_type = ' AND `products`.`sale_type`='.$args["sale_type"];
 			$sale_type_json = 'sale'.$args["sale_type"];
+		}
+
+		if(isset($args["cities"]) && is_numeric($args["cities"])){
+			$cities = ' AND `products`.`cities`='.$args["cities"];
+			$cities_json = 'cities'.$args["cities"];
 		}
 		
 		if(isset($args["rooms"]) && is_numeric($args["rooms"])){
@@ -208,7 +215,7 @@ class products
 		$from = (isset($_GET['pn']) && $_GET['pn']>0) ? (((int)$_GET['pn']-1)*$itemPerPage) : 0;
 		// echo $from;
 		
-		$json = Config::CACHE."productsweb_".str_replace(array("-"," "), "", implode("_",$_SESSION['URL'])).$itemPerPage.$from.$sale_type_json.$rooms_json.$type_json.$price_json.$forderby_json.".json";
+		$json = Config::CACHE."productsweb_".str_replace(array("-"," "), "", implode("_",$_SESSION['URL'])).$itemPerPage.$from.$sale_type_json.$cities_json.$rooms_json.$type_json.$price_json.$forderby_json.".json";
 
 		if(file_exists($json)){
 			$fetch = @file_get_contents($json); 
@@ -217,6 +224,7 @@ class products
 			$select = "SELECT 
 			(SELECT COUNT(`id`) FROM `products` WHERE `products`.`pid`=:pid AND `products`.`lang`=:lang AND `products`.`status`!=:one) as counted, 
 			(SELECT `usefull`.`title` FROM `usefull` WHERE `usefull`.`idx`=`products`.`sale_type`) AS sale_type, 
+			(SELECT `usefull`.`title` FROM `usefull` WHERE `usefull`.`idx`=`products`.`cities`) AS cities, 
 			(SELECT `usefull`.`title` FROM `usefull` WHERE `usefull`.`idx`=`products`.`rooms`) AS rooms, 
 			(SELECT `usefull`.`title` FROM `usefull` WHERE `usefull`.`idx`=`products`.`type`) AS type, 
 			`products`.`idx`, 
@@ -237,7 +245,7 @@ class products
 			`products`.`pid`=:pid AND 
 			`products`.`lang`=:lang AND 
 			`products`.`showwebsite`=2 AND 
-			`products`.`status`!=:one ".$sale_type.$rooms.$type.$price."
+			`products`.`status`!=:one ".$sale_type.$cities.$rooms.$type.$price."
 			ORDER BY ".$forderby." LIMIT ".$from.",".$itemPerPage;
 
 			// echo $select; 
@@ -491,6 +499,7 @@ class products
 		$orderid = $args["orderid"];
 		$title = $args["title"];		
 		$sale_type = $args["sale_type"];
+		$cities = $args["cities"];
 		$rooms = $args["rooms"];
 		$type = $args["type"];
 		$price = $args["price"];
@@ -523,6 +532,7 @@ class products
 			`orderid`=:orderid, 
 			`title`=:title, 
 			`sale_type`=:sale_type, 
+			`cities`=:cities, 
 			`rooms`=:rooms, 
 			`type`=:type, 
 			`price`=:price, 
@@ -546,6 +556,7 @@ class products
 				":orderid"=>$orderid, 
 				":title"=>$title, 
 				":sale_type"=>$sale_type, 
+				":cities"=>$cities, 
 				":rooms"=>$rooms, 
 				":type"=>$type, 
 				":price"=>$price,
@@ -870,6 +881,7 @@ class products
 		$orderid = $args["orderid"];
 		$title = $args["title"];		
 		$sale_type = $args["sale_type"];
+		$cities = $args["cities"];
 		$rooms = $args["rooms"];
 		$type = $args["type"];
 		$price = $args["price"];
@@ -903,6 +915,7 @@ class products
 		`date`=:datex, 
 		`orderid`=:orderid, 
 		`sale_type`=:sale_type, 
+		`cities`=:cities, 
 		`rooms`=:rooms, 
 		`type`=:type, 
 		`price`=:price, 
@@ -916,6 +929,7 @@ class products
 			":datex"=>$date, 
 			":orderid"=>$orderid,
 			":sale_type"=>$sale_type,
+			":cities"=>$cities,
 			":rooms"=>$rooms, 
 			":type"=>$type, 
 			":price"=>$price, 

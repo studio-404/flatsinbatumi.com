@@ -28,7 +28,7 @@ echo $data['headertop'];
             <section class="list-group-item desktop-list-group-item">
               <section class="row">
                 <section class="col-sm-3 filter-select-item">
-                  <select title="filter" class="form-control" id="fcities">
+                  <select title="filter" class="form-control" id="cities">
                     <option value="">Город</option> 
                     <?php 
                     foreach($data["cities"] as $city) : 
