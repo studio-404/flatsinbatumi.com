@@ -181,12 +181,12 @@ border-bottom-left-radius: 60px;
 	.g-currency-box p a{ font-size: 14px !important; }
 
 	header .title-container{
-		font-size: 16px !important;
+		font-size: 20px !important;
     	line-height: 38px !important;
 	}
 
 	header .sub-title-container{
-		font-size: 10px !important;
+		font-size: 12px !important;
     	line-height: 25px !important;
 	}
 }
