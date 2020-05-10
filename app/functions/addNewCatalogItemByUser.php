@@ -12,6 +12,7 @@ class addNewCatalogItemByUser
 		if(
 			!request::index("POST","title") || 
 			!request::index("POST","sale_price") || 
+			!request::index("POST","cities") || 
 			!request::index("POST","rooms") || 
 			!request::index("POST","type") || 
 			!request::index("POST","price") || 
@@ -25,6 +26,7 @@ class addNewCatalogItemByUser
 			$orderid = 1;
 			$title = strip_tags(request::index("POST","title")); 
 			$sale_price = strip_tags(request::index("POST","sale_price")); 
+			$cities = strip_tags(request::index("POST","cities")); 
 			$rooms = strip_tags(request::index("POST","rooms")); 
 			$type = strip_tags(request::index("POST","type")); 
 			$price = strip_tags(request::index("POST","price")); 
@@ -101,6 +103,7 @@ class addNewCatalogItemByUser
 				'orderid'=>$orderid, 
 				'title'=>$title, 
 				'sale_type'=>$sale_price, 
+				'cities'=>$cities, 
 				'rooms'=>$rooms, 
 				'type'=>$type, 
 				'price'=>$price, 

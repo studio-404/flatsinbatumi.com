@@ -51,6 +51,11 @@ class Rentapartment extends Controller
 			"type"=>"salestype"
 		));
 
+		$db_cities = new Database("modules", array(
+			"method"=>"selectModuleByType", 
+			"type"=>"cities"
+		));
+
 		$db_rooms = new Database("modules", array(
 			"method"=>"selectModuleByType", 
 			"type"=>"rooms"
@@ -111,6 +116,7 @@ class Rentapartment extends Controller
 			"editpassword"=>$editpassword->index(), 
 			"pageData"=>$db_pagedata->getter(), 
 			"salestype"=>$db_salestype->getter(), 
+			"cities"=>$db_cities->getter(), 
 			"rooms"=>$db_rooms->getter(), 
 			"type"=>$db_type->getter(), 
 			"user"=>$db_user->getter(), 

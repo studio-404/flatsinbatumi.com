@@ -579,6 +579,7 @@ $(document).on("click", ".add-new-item", function(event){
 	
 	var title = $("#title").val();
 	var sale_price = $("#sale_price").val();
+	var cities = $("#cities").val();
 	var rooms = $("#rooms").val();
 	var type = $("#type").val();
 	var price = $("#price").val();
@@ -611,6 +612,7 @@ $(document).on("click", ".add-new-item", function(event){
 	if(
 		(typeof title === "undefined" || title=="") ||
 		(typeof sale_price === "undefined" || sale_price=="") ||
+		(typeof cities === "undefined" || cities=="") ||
 		(typeof rooms === "undefined" || rooms=="") ||
 		(typeof type === "undefined" || type=="") || 
 		(typeof price === "undefined" || price=="") || 

@@ -66,11 +66,11 @@ echo $data['headertop'];
                       </div>
 
                       <div class="form-group">
-                        <label>Комната*</label> 
+                        <label>Город*</label> 
                         <section class="filter-select-item">
-                          <select title="filter" name="rooms" id="rooms" class="form-control" style="border: none; border-radius: 0px;">
-                            <?php foreach($data["rooms"] as $room) : ?>
-                            <option value="<?=$room["idx"]?>" <?=(functions\request::index("POST", "rooms") && functions\request::index("POST", "rooms")==$room["idx"]) ? "selected='selected'" : ""?>><?=$room["title"]?></option> 
+                          <select title="filter" name="cities" id="cities" class="form-control" style="border: none; border-radius: 0px;">
+                            <?php foreach($data["cities"] as $city) : ?>
+                            <option value="<?=$city["idx"]?>" <?=(functions\request::index("POST", "cities") && functions\request::index("POST", "cities")==$city["idx"]) ? "selected='selected'" : ""?>><?=$city["title"]?></option> 
                             <?php endforeach; ?>
                           </select>
                         </section> 
@@ -82,6 +82,17 @@ echo $data['headertop'];
                           <select title="filter" name="type" id="type" class="form-control" style="border: none; border-radius: 0px;">
                             <?php foreach($data["type"] as $type) : ?>
                             <option value="<?=$type["idx"]?>" <?=(functions\request::index("POST", "type") && functions\request::index("POST", "type")==$type["idx"]) ? "selected='selected'" : ""?>><?=$type["title"]?></option> 
+                            <?php endforeach; ?>
+                          </select>
+                        </section> 
+                      </div>
+
+                      <div class="form-group">
+                        <label>Комната*</label> 
+                        <section class="filter-select-item">
+                          <select title="filter" name="rooms" id="rooms" class="form-control" style="border: none; border-radius: 0px;">
+                            <?php foreach($data["rooms"] as $room) : ?>
+                            <option value="<?=$room["idx"]?>" <?=(functions\request::index("POST", "rooms") && functions\request::index("POST", "rooms")==$room["idx"]) ? "selected='selected'" : ""?>><?=$room["title"]?></option> 
                             <?php endforeach; ?>
                           </select>
                         </section> 

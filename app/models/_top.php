@@ -68,7 +68,7 @@ class _top
 			"<section class=\"logo-container\"><a href=\"%s\" class=\"logo\">Logo</a></section>\n",
 			Config::WEBSITE
 		);
-		$out .= "<section class=\"title-container\">КВАРТИРЫ В БАТУМИ</section>\n";
+		$out .= "<section class=\"title-container\">НЕДВИЖИМОСТЬ В БАТУМИ</section>\n";
 		$out .= "<section class=\"sub-title-container\">Продажа и аренда недвижимости в Батуми</section>\n";
 		$out .= "</header>\n";
 
