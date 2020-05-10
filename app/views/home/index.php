@@ -78,10 +78,10 @@ echo $data['headertop'];
               <br> 
               <section class="row">
                 <section class="col-sm-2 filter-select-item">
-                  <input type="number" min="5" title="цена от - USD" id="fprice_from" placeholder="цена от - USD" class="form-control" value="<?=(isset($_SESSION["query"]["price_from"]) ? $_SESSION["query"]["price_from"] : '')?>">
+                  <input type="number" min="5" title="цена от" id="fprice_from" placeholder="цена от" class="form-control" value="<?=(isset($_SESSION["query"]["price_from"]) ? $_SESSION["query"]["price_from"] : '')?>">
                 </section> 
                 <section class="col-sm-2 filter-select-item">
-                  <input type="number" min="5" title="цена до - USD" id="fprice_to" placeholder="цена до - USD" class="form-control" value="<?=(isset($_SESSION["query"]["price_to"]) ? $_SESSION["query"]["price_to"] : '')?>">
+                  <input type="number" min="5" title="цена до" id="fprice_to" placeholder="цена до" class="form-control" value="<?=(isset($_SESSION["query"]["price_to"]) ? $_SESSION["query"]["price_to"] : '')?>">
                 </section> 
                 <br class="hidden-md hidden-lg hidden-sm"> 
                 <section class="col-sm-4 filter-select-item">
