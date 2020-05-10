@@ -1,0 +1,4 @@
+[10-Sep-2017 06:13:55 America/Chicago] PHP Fatal error:  Class 'Config' not found in /home/geoweb/lemi.404.ge/public/elfinder/elfinder.php on line 2
+[10-Sep-2017 06:15:21 America/Chicago] PHP Warning:  require_once(../app/core/Config.php): failed to open stream: No such file or directory in /home/geoweb/lemi.404.ge/public/elfinder/elfinder.php on line 2
+[10-Sep-2017 06:15:21 America/Chicago] PHP Fatal error:  require_once(): Failed opening required '../app/core/Config.php' (include_path='.:/opt/php54/lib/php') in /home/geoweb/lemi.404.ge/public/elfinder/elfinder.php on line 2
+[10-Sep-2017 06:16:39 America/Chicago] PHP Parse error:  syntax error, unexpected ')', expecting ']' in /home/geoweb/lemi.404.ge/public/elfinder/elfinder.php on line 6
