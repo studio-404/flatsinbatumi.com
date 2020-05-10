@@ -172,6 +172,7 @@ class Home extends Controller
 			"method"=>"select_website", 
 			"itemPerPage"=>$itemPerPage,
 			"sale_type"=>(isset($_SESSION["query"]["sale_type"]) ? $_SESSION["query"]["sale_type"] : $selected_sale_type),
+			"cities"=>(isset($_SESSION["query"]["cities"]) ? $_SESSION["query"]["cities"] : $selected_city),
 			"rooms"=>(isset($_SESSION["query"]["rooms"]) ? $_SESSION["query"]["rooms"] : ''),
 			"type"=>(isset($_SESSION["query"]["type"]) ? $_SESSION["query"]["type"] : ''),
 			"price_from"=>$price_from,

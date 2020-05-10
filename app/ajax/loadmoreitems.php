@@ -34,6 +34,7 @@ class loadmoreitems
 		$pn = functions\request::index("POST","pn"); 
 		$nextFrom = $from + $itemPerPage;
 		$fsale_type = functions\request::index("POST","fsale_type");
+		$cities = functions\request::index("POST","cities");
 		$frooms = functions\request::index("POST","frooms");
 		$ftype = functions\request::index("POST","ftype");
 		$fprice_from = functions\request::index("POST","fprice_from");
@@ -95,16 +96,17 @@ class loadmoreitems
 			);
 		}else{
 			$Database = new Database('products', array(
-					'method'=>'select_website', 
-					'itemPerPage'=>$itemPerPage, 
-					'sale_type'=>$fsale_type, 
-					'rooms'=>$frooms, 
-					'type'=>$ftype, 
-					'price_from'=>$price_from, 
-					'price_to'=>$price_to, 
-					'forderby'=>$forderby, 
-					'pn'=>$pn, 
-					'lang'=>$_SESSION["LANG"]
+				'method'=>'select_website', 
+				'itemPerPage'=>$itemPerPage, 
+				'sale_type'=>$fsale_type, 
+				'cities'=>$cities, 
+				'rooms'=>$frooms, 
+				'type'=>$ftype, 
+				'price_from'=>$price_from, 
+				'price_to'=>$price_to, 
+				'forderby'=>$forderby, 
+				'pn'=>$pn, 
+				'lang'=>$_SESSION["LANG"]
 			));
 
 

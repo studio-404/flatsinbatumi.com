@@ -248,8 +248,6 @@ class products
 			`products`.`status`!=:one ".$sale_type.$cities.$rooms.$type.$price."
 			ORDER BY ".$forderby." LIMIT ".$from.",".$itemPerPage;
 
-			// echo $select; 
-
 			$prepare = $this->conn->prepare($select); 
 			$prepare->execute(array(
 				":pid"=>2, 

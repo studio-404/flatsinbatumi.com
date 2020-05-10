@@ -135,13 +135,8 @@ echo $data['headertop'];
 
               <div id="results">
               <?php 
+              if(count($data["products"])>0){
               foreach ($data["products"] as $item) : 
-                // $additionaldata = explode(",", $item["additional_data"]);
-                // $ploshad_explode = explode("input[35]=", @$additionaldata[0]);
-                // $etaj_explode = explode("input[36]=", @$additionaldata[1]);
-                // $totaletaj_explode = explode("input[93]=", @$additionaldata[2]);
-                // $spalni_explode = explode("input[37]=", @$additionaldata[3]);
-
                 $ploshad_explode = "";
                 if(preg_match_all("/input\[35\]\=(\d+)/", $item["additional_data"], $ploshad_explode)){
                   $ploshad_explode = $ploshad_explode[1][0];
@@ -162,91 +157,94 @@ echo $data['headertop'];
                   $spalni_explode = $spalni_explode[1][0];
                 }                
               ?>
-                  <div class="list-group-item" style="background-color: rgba(18,115,185,.7); border: 1px solid rgba(42,74,109,.32); color:white">
-                    <section class="row">
-                        <section class="flat-price" style="height: auto;">
-                          <?php 
-                          $realprice = 0;
-                          $curname = "";
-                          if(isset($_SESSION["currency"]) && $_SESSION["currency"]=="gel"){
-                            $realprice = (int)($item["price"]*$_SESSION["_USD_"]);
-                            $curname = "GEL";
-                          }else if(isset($_SESSION["currency"]) && $_SESSION["currency"]=="usd"){
-                            $realprice = (int)$item["price"];
-                            $curname = "USD";
-                          }else if(isset($_SESSION["currency"]) && $_SESSION["currency"]=="rub"){
-                            $realprice = (int)((int)($item["price"]*$_SESSION["_USD_"])/$_SESSION["_RUB_"]);
-                            $curname = "RUB";
-                          }
+                <div class="list-group-item" style="background-color: rgba(18,115,185,.7); border: 1px solid rgba(42,74,109,.32); color:white">
+                  <section class="row">
+                      <section class="flat-price" style="height: auto;">
+                        <?php 
+                        $realprice = 0;
+                        $curname = "";
+                        if(isset($_SESSION["currency"]) && $_SESSION["currency"]=="gel"){
+                          $realprice = (int)($item["price"]*$_SESSION["_USD_"]);
+                          $curname = "GEL";
+                        }else if(isset($_SESSION["currency"]) && $_SESSION["currency"]=="usd"){
+                          $realprice = (int)$item["price"];
+                          $curname = "USD";
+                        }else if(isset($_SESSION["currency"]) && $_SESSION["currency"]=="rub"){
+                          $realprice = (int)((int)($item["price"]*$_SESSION["_USD_"])/$_SESSION["_RUB_"]);
+                          $curname = "RUB";
+                        }
+                        ?>
+                        <span><?=$realprice?></span> <?=$curname?>
+                        <?php 
+                        if($item["sale_type"]=="Продажа" && (int)$ploshad_explode>0){
+                          $m2price = round($realprice / (int)$ploshad_explode);
                           ?>
-                          <span><?=$realprice?></span> <?=$curname?>
+                          <br /><span style="font-size: 12px;"><?=$m2price?> <?=$curname?> / м<sup>2</sup></span>
+                          <?php
+                        }
+                        ?>
+                      </section> 
+                      <section class="col-sm-4 g-image-container g-container<?=$item["idx"]?>" data-loading="false">
+                        <div class="g-infox">
+                          <span class="g-activex">1</span> - 
+                          <span class="g-maxx"><?=$item["photoCount"]?></span>
+                        </div>
+                        <div class="g-leftar g-arrow" data-idx="<?=$item["idx"]?>" data-active="1" data-max="<?=$item["photoCount"]?>"><i class="fa fa-angle-left"></i></div>
+                        <a href="/ru/view/<?=urlencode(strip_tags($item["title"]))?>/?id=<?=(int)$item["idx"]?>" class="g-image-sliderx">
+                        <img src="<?=Config::WEBSITE.$_SESSION["LANG"]?>/image/loadimage?f=<?=base64_encode(Config::WEBSITE_.$item["photo"])?>&w=<?=base64_encode("220")?>&h=<?=base64_encode("220")?>" class="loading img-responsive img-thumbnail" />
+                        </a>
+                        <div class="g-rightar g-arrow" data-idx="<?=$item["idx"]?>" data-active="1" data-max="<?=$item["photoCount"]?>"><i class="fa fa-angle-right"></i></div>
+                      </section> 
+                      
+                      <section class="col-sm-8">
+                        <a href="/ru/view/<?=urlencode(strip_tags($item["title"]))?>/?id=<?=(int)$item["idx"]?>" style="color:white; text-decoration: none;">
+                        <section class="flat-labels">
+                          <span title="<?=htmlentities($item["type"])?>"><?=$string::cutstatic($item["type"], 8)?></span>
+                          <span><?=$item["rooms"]?></span>
+                          <span><?=(int)@$spalni_explode?> Спальни</span>
+                          <span><?=(int)@$ploshad_explode?> м<sup>2</sup></span>
+                          <span><?=(int)@$etaj_explode?>/<?=(int)@$totaletaj_explode?> зтаж</span>
+                        </section> 
+                        <h4 style="text-align: left; line-height: 22px;" class="g-desktop-width400 g-margin-top-desktop40">
+                          <span><?=$item["title"]?></span> 
+                          <span class="text-primary" style="margin: 10px 0 0 5px;">
+                            <i class="fa fa-hand-o-right"></i>&nbsp;
+                            ID <span><?=$item["orderid"]?></span>
+                          </span>
+                        </h4>
+                        <section class="text-muted margin-top20">
                           <?php 
-                          if($item["sale_type"]=="Продажа" && (int)$ploshad_explode>0){
-                            $m2price = round($realprice / (int)$ploshad_explode);
-                            ?>
-                            <br /><span style="font-size: 12px;"><?=$m2price?> <?=$curname?> / м<sup>2</sup></span>
-                            <?php
-                          }
+                          // $string->cut(strip_tags($item["description"]), 120);
                           ?>
-                        </section> 
-                        <section class="col-sm-4 g-image-container g-container<?=$item["idx"]?>" data-loading="false">
-                          <div class="g-infox">
-                            <span class="g-activex">1</span> - 
-                            <span class="g-maxx"><?=$item["photoCount"]?></span>
-                          </div>
-                          <div class="g-leftar g-arrow" data-idx="<?=$item["idx"]?>" data-active="1" data-max="<?=$item["photoCount"]?>"><i class="fa fa-angle-left"></i></div>
-                          <a href="/ru/view/<?=urlencode(strip_tags($item["title"]))?>/?id=<?=(int)$item["idx"]?>" class="g-image-sliderx">
-                          <img src="<?=Config::WEBSITE.$_SESSION["LANG"]?>/image/loadimage?f=<?=base64_encode(Config::WEBSITE_.$item["photo"])?>&w=<?=base64_encode("220")?>&h=<?=base64_encode("220")?>" class="loading img-responsive img-thumbnail" />
-                          </a>
-                          <div class="g-rightar g-arrow" data-idx="<?=$item["idx"]?>" data-active="1" data-max="<?=$item["photoCount"]?>"><i class="fa fa-angle-right"></i></div>
-                        </section> 
-                        
-                        <section class="col-sm-8">
-                          <a href="/ru/view/<?=urlencode(strip_tags($item["title"]))?>/?id=<?=(int)$item["idx"]?>" style="color:white; text-decoration: none;">
-                          <section class="flat-labels">
-                            <span title="<?=htmlentities($item["type"])?>"><?=$string::cutstatic($item["type"], 8)?></span>
-                            <span><?=$item["rooms"]?></span>
-                            <span><?=(int)@$spalni_explode?> Спальни</span>
-                            <span><?=(int)@$ploshad_explode?> м<sup>2</sup></span>
-                            <span><?=(int)@$etaj_explode?>/<?=(int)@$totaletaj_explode?> зтаж</span>
-                          </section> 
-                          <h4 style="text-align: left; line-height: 22px;" class="g-desktop-width400 g-margin-top-desktop40">
-                            <span><?=$item["title"]?></span> 
-                            <span class="text-primary" style="margin: 10px 0 0 5px;">
-                              <i class="fa fa-hand-o-right"></i>&nbsp;
-                              ID <span><?=$item["orderid"]?></span>
-                            </span>
-                          </h4>
-                          <section class="text-muted margin-top20">
-                            <?php 
-                            // $string->cut(strip_tags($item["description"]), 120);
-                            ?>
-                            <p style="margin-top: 10px; margin-bottom: 0"><strong>Адрес: </strong><?=$item["address"]?></p>
-                            <?php 
-                            $db_views = new Database("products", array(
-                              "method"=>"select_views",
-                              "idx"=>$item["idx"]
-                            ));
-                            $views = $db_views->getter();
-                            ?>
-                            <p>&nbsp;</p>
-                            <strong>Просмотров всево: <?=$views["totalviews"]?> Cегодня: <?=$views["todayviews"]?> 
-                          <!-- <em onclick="location.href='/ru/searchonmap/?idx=<?=$item["idx"]?>'; return false;">Показать на карте</em> -->
-                          </strong>
+                          <p style="margin-top: 10px; margin-bottom: 0"><strong>Адрес: </strong><?=$item["address"]?></p>
+                          <?php 
+                          $db_views = new Database("products", array(
+                            "method"=>"select_views",
+                            "idx"=>$item["idx"]
+                          ));
+                          $views = $db_views->getter();
+                          ?>
+                          <p>&nbsp;</p>
+                          <strong>Просмотров всево: <?=$views["totalviews"]?> Cегодня: <?=$views["todayviews"]?> 
+                        <!-- <em onclick="location.href='/ru/searchonmap/?idx=<?=$item["idx"]?>'; return false;">Показать на карте</em> -->
+                        </strong>
 
-                          </section> 
-                          </a>
-                        </section>
+                        </section> 
+                        </a>
                       </section>
-                    </div>
-                  <?php
-                  endforeach;
-                ?>
-                </div>
+                    </section>
+                  </div>
+                <?php
+                endforeach;
+              ?>
+              </div>
 
               <div class="list-group-item loadergif" style="display:none; text-align: center; color: white;"><i class="fa fa-circle-o-notch fa-spin"></i></div>
 
               <section class="action-button loadmoreitems" data-loaded="<?=$data["itemPerPage"]?>">Показать ещё квартиры</section>
+              <?php }else{ ?>
+              <p class="list-group-item" style="color: white; font-size:22px;">Нет данных</p>
+              <?php } ?>
 
             </section>
           </section>
