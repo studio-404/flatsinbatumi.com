@@ -473,6 +473,7 @@ class products
 		`products`.`price`,
 		`products`.`description`,
 		`products`.`showwebsite`,
+		`products`.`additional_data`,
 		(SELECT `photos`.`path` FROM `photos` WHERE `photos`.`parent`=`products`.`idx` AND `photos`.`type`='products' AND `photos`.`lang`=`products`.`lang` AND `photos`.`status`!=:one ORDER BY `photos`.`id` ASC LIMIT 1) AS photo
 		FROM 
 		`users_website`, `products` 

@@ -93,7 +93,28 @@ echo $data['headertop'];
                     <a href="/ru/rentapartment" class="text-primary btn btn-success"><i class="fa fa-building-o"></i>&emsp;Сдать квартиру</a>
                   </section>
 
-                  <?php foreach ($data["usersProducts"] as $item) : ?>
+                  <?php foreach ($data["usersProducts"] as $item) : 
+
+                    $ploshad_explode = "";
+                    if(preg_match_all("/input\[35\]\=(\d+)/", $item["additional_data"], $ploshad_explode)){
+                      $ploshad_explode = $ploshad_explode[1][0];
+                    }
+
+                    $etaj_explode = "";
+                    if(preg_match_all("/input\[36\]\=(\d+)/", $item["additional_data"], $etaj_explode)){
+                      $etaj_explode = $etaj_explode[1][0];
+                    }
+
+                    $totaletaj_explode = "";
+                    if(preg_match_all("/input\[93\]\=(\d+)/", $item["additional_data"], $totaletaj_explode)){
+                      $totaletaj_explode = $totaletaj_explode[1][0];
+                    }
+
+                    $spalni_explode = "";
+                    if(preg_match_all("/input\[37\]\=(\d+)/", $item["additional_data"], $spalni_explode)){
+                      $spalni_explode = $spalni_explode[1][0];
+                    }  
+                  ?>
                   <div class="list-group-item" style="background-color: rgba(18,115,185,.7); border: 1px solid rgba(42,74,109,.32); color:white">
                     <section class="row">
                         <section class="flat-price" <?=($item["showwebsite"]==1) ? 'style="background-color:red"' : ''?>>
@@ -121,9 +142,11 @@ echo $data['headertop'];
                         
                         <section class="col-sm-8">
                           <section class="flat-labels">
-                            <span><?=$item["sale_type"]?></span> 
-                            <span><?=$item["rooms"]?></span> 
-                            <span><?=$item["type"]?></span>
+                            <span title="<?=htmlentities($item["type"])?>"><?=$string::cutstatic($item["type"], 8)?></span>
+                            <span><?=$item["rooms"]?></span>
+                            <span><?=(int)@$spalni_explode?> Спальни</span>
+                            <span><?=(int)@$ploshad_explode?> м<sup>2</sup></span>
+                            <span><?=(int)@$etaj_explode?>/<?=(int)@$totaletaj_explode?> зтаж</span>
                           </section> 
                           <h4 style="text-align: left">
                             <span><?=$item["title"]?></span> 
