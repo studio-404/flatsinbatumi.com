@@ -1,0 +1,2 @@
+# bemyguest.ge
+# flatsinbatumi.com
