@@ -1,6 +1,5 @@
 /sftp-config.json
 /app/core/Config.php
-/app/_plugins
 /.htaccess
 /app/vendor
 /public/elfinder
