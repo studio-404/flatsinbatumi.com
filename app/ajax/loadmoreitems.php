@@ -114,12 +114,6 @@ class loadmoreitems
 			{
 				$rsl = "";
 				foreach ($result as $item) : 
-				// $additionaldata = explode(",", $item["additional_data"]);
-    //            	$ploshad_explode = explode("input[35]=", @$additionaldata[0]);
-    //             $etaj_explode = explode("input[36]=", @$additionaldata[1]);
-    //             $totaletaj_explode = explode("input[93]=", @$additionaldata[2]);
-    //             $spalni_explode = explode("input[37]=", @$additionaldata[3]);
-
 				$ploshad_explode = "";
                 if(preg_match_all("/input\[35\]\=(\d+)/", $item["additional_data"], $ploshad_explode)){
                   $ploshad_explode = $ploshad_explode[1][0];

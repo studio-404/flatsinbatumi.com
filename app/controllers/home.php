@@ -168,13 +168,14 @@ class Home extends Controller
 
 		$selected_sale_type = 57; // prodaja
 		$selected_city = 94; // cities
+		$selected_type = 64; // type
 		$db_product = new Database("products", array(
 			"method"=>"select_website", 
 			"itemPerPage"=>$itemPerPage,
 			"sale_type"=>(isset($_SESSION["query"]["sale_type"]) ? $_SESSION["query"]["sale_type"] : $selected_sale_type),
 			"cities"=>(isset($_SESSION["query"]["cities"]) ? $_SESSION["query"]["cities"] : $selected_city),
 			"rooms"=>(isset($_SESSION["query"]["rooms"]) ? $_SESSION["query"]["rooms"] : ''),
-			"type"=>(isset($_SESSION["query"]["type"]) ? $_SESSION["query"]["type"] : ''),
+			"type"=>(isset($_SESSION["query"]["type"]) ? $_SESSION["query"]["type"] : $selected_type),
 			"price_from"=>$price_from,
 			"price_to"=>$price_to,
 			"forderby"=>$or,
@@ -280,6 +281,7 @@ class Home extends Controller
 			"leftnav"=>$leftnav->index(), 
 			"selected_sale_type"=>$selected_sale_type, 
 			"selected_city"=>$selected_city, 
+			"selected_type"=>$selected_type, 
 			"footer"=>$footer->index() 
 		]);
 	}

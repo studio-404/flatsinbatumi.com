@@ -33,7 +33,7 @@ echo $data['headertop'];
                     <?php 
                     foreach($data["cities"] as $city) : 
                       $selected = (isset($_SESSION["query"]["cities"]) && $_SESSION["query"]["cities"]==$city["idx"]) ? 'selected="selected"' : '';    
-                      $selected = ($selected=="" && $city["idx"]==$data["selected_city"]) ? 'selected="selected"' : $selected;                  
+                      $selected = ($selected=="" && $city["idx"]==$data["selected_city"]) ? 'selected="selected"' : $selected; 
                     ?>                    
                     <option value="<?=$city["idx"]?>" <?=$selected?>><?=$city["title"]?></option> 
                     <?php endforeach; ?>
@@ -57,6 +57,7 @@ echo $data['headertop'];
                     <?php 
                     foreach($data["type"] as $type) : 
                     $selected = (isset($_SESSION["query"]["type"]) && $_SESSION["query"]["type"]==$type["idx"]) ? 'selected="selected"' : '';
+                    $selected = ($selected=="" && $type["idx"]==$data["selected_type"]) ? 'selected="selected"' : $selected;   
                     ?>
                     <option value="<?=$type["idx"]?>" <?=$selected?>><?=$type["title"]?></option> 
                     <?php endforeach; ?>
