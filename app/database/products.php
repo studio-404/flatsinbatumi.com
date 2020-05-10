@@ -272,11 +272,13 @@ class products
 		require_once("app/functions/request.php"); 
 
 		$sale_type = '';
+		$cities = '';
 		$rooms = '';
 		$type = '';
 		$price = '';
 		$forderby = "`products`.`orderid` ASC";
 		$sale_type_json = '';
+		$cities_json = '';
 		$rooms_json = '';
 		$type_json = '';
 		$price_json = '';
@@ -284,6 +286,11 @@ class products
 		if(isset($args["sale_type"]) && is_numeric($args["sale_type"])){
 			$sale_type = ' AND `products`.`sale_type`='.$args["sale_type"];
 			$sale_type_json = 'sale'.$args["sale_type"];
+		}
+
+		if(isset($args["cities"]) && is_numeric($args["cities"])){
+			$cities = ' AND `products`.`cities`='.$args["cities"];
+			$cities_json = 'cities'.$args["cities"];
 		}
 		if(isset($args["rooms"]) && is_numeric($args["rooms"])){
 			$rooms = ' AND `products`.`rooms`='.$args["rooms"];
@@ -327,12 +334,13 @@ class products
 			$idx = functions\request::index("GET", "idx");
 			$idxsql = " AND `idx`=".$idx;
 			$sale_type = "";
+			$cities = "";
 			$rooms = "";
 			$type="";
 			$price="";
 		}
 
-		$json = Config::CACHE."productsweb_map_".str_replace(array("-"," "), "", implode("_",$_SESSION['URL'])).$sale_type_json.$rooms_json.$type_json.$price_json.$idx.".json";
+		$json = Config::CACHE."productsweb_map_".str_replace(array("-"," "), "", implode("_",$_SESSION['URL'])).$sale_type_json.$cities_json.$rooms_json.$type_json.$price_json.$idx.".json";
 
 		if(file_exists($json)){
 			$fetch = @file_get_contents($json); 
@@ -340,6 +348,7 @@ class products
 			
 			$select = "SELECT 
 			(SELECT `usefull`.`title` FROM `usefull` WHERE `usefull`.`idx`=`products`.`sale_type`) AS sale_type, 
+			(SELECT `usefull`.`title` FROM `usefull` WHERE `usefull`.`idx`=`products`.`cities`) AS cities, 
 			(SELECT `usefull`.`title` FROM `usefull` WHERE `usefull`.`idx`=`products`.`rooms`) AS rooms, 
 			(SELECT `usefull`.`title` FROM `usefull` WHERE `usefull`.`idx`=`products`.`type`) AS type, 
 			`products`.`idx`, 
@@ -360,7 +369,7 @@ class products
 			`products`.`pid`=:pid AND 
 			`products`.`lang`=:lang AND 
 			`products`.`showwebsite`=2 AND 
-			`products`.`status`!=:one ".$sale_type.$rooms.$type.$price.$idxsql;
+			`products`.`status`!=:one ".$sale_type.$cities.$rooms.$type.$price.$idxsql;
 
 			// echo $select;
 

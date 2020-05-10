@@ -239,7 +239,7 @@ $(document).on("click", ".change-order-list", function(){
 });
 
 setTimeout(function(){
-	document.getElementById("audio").play();
+	// document.getElementById("audio").play();
 	$(".send-me-variants-title .desktop").css("display","none");
 	$(".send-me-variants-title .mobile").css("display","none");
 	$( ".send-me-variants-title" ).addClass("opened");	
@@ -742,12 +742,30 @@ $(document).on("click", ".searchMap", function(){
 	var goto = "/ru/searchonmap/?";
 	goto += "price_from="+$("#fprice_from").val();
 	goto += "&price_to="+$("#fprice_to").val();
+	goto += "&cities="+$("#cities").val();
 	goto += "&rooms="+$("#frooms").val();
 	goto += "&sale_type="+$("#fsale_type").val();
 	goto += "&type="+$("#ftype").val();
 
 	location.href = goto;
 });
+
+$(document).on("change", "#cities", function(){
+	$(".searchButton").click();
+});
+
+$(document).on("change", "#fsale_type", function(){
+	$(".searchButton").click();
+});
+
+$(document).on("change", "#ftype", function(){
+	$(".searchButton").click();
+});
+
+$(document).on("change", "#frooms", function(){
+	$(".searchButton").click();
+});
+
 
 $(document).on("click", ".g-leftar", function(e){
 	e.preventDefault();

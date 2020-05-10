@@ -175,4 +175,8 @@ border-bottom-left-radius: 60px;
 	main .container .row .right .flat-list .list-group .list-group-item .row .col-sm-8 .flat-labels span{
 		margin-top: 4px;
 	}
+
+	.g-currency-box{ width: 40px !important; }
+	.g-currency-box h6{ font-size: 9px !important; }
+	.g-currency-box p a{ font-size: 14px !important; }
 }

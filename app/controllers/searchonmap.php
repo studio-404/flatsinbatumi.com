@@ -104,6 +104,11 @@ class Searchonmap extends Controller
 			"type"=>"salestype"
 		));
 
+		$db_cities = new Database("modules", array(
+			"method"=>"selectModuleByType", 
+			"type"=>"cities"
+		));
+
 		$db_rooms = new Database("modules", array(
 			"method"=>"selectModuleByType", 
 			"type"=>"rooms"
@@ -164,6 +169,7 @@ class Searchonmap extends Controller
 		$db_product = new Database("products", array(
 			"method"=>"select_website_map", 
 			"sale_type"=>(isset($_SESSION["query"]["sale_type"]) ? $_SESSION["query"]["sale_type"] : ''),
+			"cities"=>(isset($_SESSION["query"]["cities"]) ? $_SESSION["query"]["cities"] : ''),
 			"rooms"=>(isset($_SESSION["query"]["rooms"]) ? $_SESSION["query"]["rooms"] : ''),
 			"type"=>(isset($_SESSION["query"]["type"]) ? $_SESSION["query"]["type"] : ''),
 			"price_from"=>$price_from,
@@ -262,6 +268,7 @@ class Searchonmap extends Controller
 			"headertop"=>$headertop->index(), 
 			"pageData"=>$db_pagedata->getter(), 
 			"salestype"=>$db_salestype->getter(), 
+			"cities"=>$db_cities->getter(), 
 			"rooms"=>$db_rooms->getter(), 
 			"type"=>$db_type->getter(), 
 			"itemPerPage"=>$itemPerPage, 

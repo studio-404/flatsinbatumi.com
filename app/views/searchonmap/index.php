@@ -27,7 +27,19 @@ echo $data['headertop'];
 
             <section class="list-group-item desktop-list-group-item">
               <section class="row">
-                <section class="col-sm-4 filter-select-item">
+                <section class="col-sm-3 filter-select-item">
+                  <select title="filter" class="form-control" id="cities">
+                    <option value="">Город</option> 
+                    <?php 
+                    foreach($data["cities"] as $city) : 
+                      $selected = (isset($_SESSION["query"]["cities"]) && $_SESSION["query"]["cities"]==$city["idx"]) ? 'selected="selected"' : '';    
+                      $selected = ($selected=="" && $city["idx"]==$data["selected_city"]) ? 'selected="selected"' : $selected;                  
+                    ?>                    
+                    <option value="<?=$city["idx"]?>" <?=$selected?>><?=$city["title"]?></option> 
+                    <?php endforeach; ?>
+                  </select>
+                </section>
+                <section class="col-sm-3 filter-select-item">
                   <select title="filter" class="form-control" id="fsale_type">
                     <option value="">Тип продажи</option> 
                     <?php 
@@ -39,18 +51,7 @@ echo $data['headertop'];
                     <?php endforeach; ?>
                   </select>
                 </section> 
-                <section class="col-sm-4 filter-select-item">
-                  <select title="filter" class="form-control" id="frooms">
-                    <option value="">Комнаты</option> 
-                    <?php 
-                    foreach($data["rooms"] as $rooms) : 
-                    $selected = (isset($_SESSION["query"]["rooms"]) && $_SESSION["query"]["rooms"]==$rooms["idx"]) ? 'selected="selected"' : '';
-                    ?>
-                    <option value="<?=$rooms["idx"]?>" <?=$selected?>><?=$rooms["title"]?></option> 
-                    <?php endforeach; ?>
-                  </select>
-                </section> 
-                <section class="col-sm-4 filter-select-item">
+                <section class="col-sm-3 filter-select-item">
                   <select title="filter" class="form-control" id="ftype">
                     <option value="">Тип недвижимости</option> 
                     <?php 
@@ -61,6 +62,18 @@ echo $data['headertop'];
                     <?php endforeach; ?>
                   </select>
                 </section>
+                <section class="col-sm-3 filter-select-item">
+                  <select title="filter" class="form-control" id="frooms">
+                    <option value="">Комнаты</option> 
+                    <?php 
+                    foreach($data["rooms"] as $rooms) : 
+                    $selected = (isset($_SESSION["query"]["rooms"]) && $_SESSION["query"]["rooms"]==$rooms["idx"]) ? 'selected="selected"' : '';
+                    ?>
+                    <option value="<?=$rooms["idx"]?>" <?=$selected?>><?=$rooms["title"]?></option> 
+                    <?php endforeach; ?>
+                  </select>
+                </section> 
+                
               </section> 
               <br> 
               <section class="row">
@@ -92,7 +105,7 @@ echo $data['headertop'];
                       <input type="hidden" name="itemPerPage" id="itemPerPage" value="<?=$data["itemPerPage"]?>" />
                       <input type="hidden" name="forderby" id="forderby" value="<?=$or?>" />
                       <input type="hidden" name="pn" id="pn" value="<?=(isset($_SESSION["query"]["pn"]) ? (int)$_SESSION["query"]["pn"]+1 : 2)?>" />
-                      <button class="btn btn-success pull-right change-order-list">
+                      <button class="btn btn-success pull-right change-order-list" style="visibility: hidden;">
                         Сортировка
                         <i class="fa fa-sort-numeric-<?=$or?>"></i>
                       </button>
