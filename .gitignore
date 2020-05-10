@@ -2,4 +2,4 @@
 /app/core/Config.php
 /.htaccess
 /app/vendor
-/public/filemanager2
+/public/filemanager

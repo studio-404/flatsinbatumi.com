@@ -152,6 +152,33 @@ class editCatalog
 			));
 			/* Sale type End */
 
+			/* Cities Start */
+			$db_cities = new Database("modules", array(
+				"method"=>"selectModuleByType", 
+				"type"=>"cities"
+			));
+			$cities = $db_cities->getter(); 
+			$options = array();
+			foreach ($cities as $value) {
+				$options[$value['idx']] = $value['title'];
+			}
+
+			$form .= functions\makeForm::label(array(
+				"id"=>"citiesLabel", 
+				"for"=>"cities", 
+				"name"=>"ქალაქი",
+				"require"=>""
+			));
+
+			$form .= functions\makeForm::select(array(
+				"id"=>"cities",
+				"choose"=>"აირჩიეთ ქალაქი",
+				"options"=>$options,
+				"selected"=>$output["cities"],
+				"disabled"=>"false"
+			));
+			/* Sale type End */
+
 			/* rooms Start */
 			$db_rooms = new Database("modules", array(
 				"method"=>"selectModuleByType", 

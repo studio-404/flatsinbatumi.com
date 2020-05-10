@@ -104,6 +104,11 @@ class Home extends Controller
 			"type"=>"salestype"
 		));
 
+		$db_cities = new Database("modules", array(
+			"method"=>"selectModuleByType", 
+			"type"=>"cities"
+		));
+
 		$db_rooms = new Database("modules", array(
 			"method"=>"selectModuleByType", 
 			"type"=>"rooms"
@@ -162,6 +167,7 @@ class Home extends Controller
 		}
 
 		$selected_sale_type = 57; // prodaja
+		$selected_city = 94; // cities
 		$db_product = new Database("products", array(
 			"method"=>"select_website", 
 			"itemPerPage"=>$itemPerPage,
@@ -265,12 +271,14 @@ class Home extends Controller
 			"headertop"=>$headertop->index(), 
 			"pageData"=>$db_pagedata->getter(), 
 			"salestype"=>$db_salestype->getter(), 
+			"cities"=>$db_cities->getter(), 
 			"rooms"=>$db_rooms->getter(), 
 			"type"=>$db_type->getter(), 
 			"itemPerPage"=>$itemPerPage, 
 			"products"=>$db_product->getter(), 
 			"leftnav"=>$leftnav->index(), 
 			"selected_sale_type"=>$selected_sale_type, 
+			"selected_city"=>$selected_city, 
 			"footer"=>$footer->index() 
 		]);
 	}

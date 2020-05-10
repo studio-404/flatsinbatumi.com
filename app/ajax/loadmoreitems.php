@@ -213,7 +213,7 @@ class loadmoreitems
 				);
 				$rsl .= "<section class=\"flat-labels\">";
 				// $rsl .= sprintf("<span>%s</span>", $item["sale_type"]); 
-				$rsl .= sprintf("<span>%s</span>", $item["type"]);
+				$rsl .= sprintf("<span title=\"%s\">%s</span>", htmlentities($item["type"]), $string::cutstatic($item["type"], 8));
 				$rsl .= sprintf("<span>%s</span>", $item["rooms"]);
 				$rsl .= sprintf("<span>%s Спальни</span>", (int)@$spalni_explode);			
 				

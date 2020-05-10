@@ -27,7 +27,19 @@ echo $data['headertop'];
 
             <section class="list-group-item desktop-list-group-item">
               <section class="row">
-                <section class="col-sm-4 filter-select-item">
+                <section class="col-sm-3 filter-select-item">
+                  <select title="filter" class="form-control" id="fcities">
+                    <option value="">Город</option> 
+                    <?php 
+                    foreach($data["cities"] as $city) : 
+                      $selected = (isset($_SESSION["query"]["cities"]) && $_SESSION["query"]["cities"]==$city["idx"]) ? 'selected="selected"' : '';    
+                      $selected = ($selected=="" && $city["idx"]==$data["selected_city"]) ? 'selected="selected"' : $selected;                  
+                    ?>                    
+                    <option value="<?=$city["idx"]?>" <?=$selected?>><?=$city["title"]?></option> 
+                    <?php endforeach; ?>
+                  </select>
+                </section>
+                <section class="col-sm-3 filter-select-item">
                   <select title="filter" class="form-control" id="fsale_type">
                     <option value="">Тип сделки</option> 
                     <?php 
@@ -39,18 +51,7 @@ echo $data['headertop'];
                     <?php endforeach; ?>
                   </select>
                 </section> 
-                <section class="col-sm-4 filter-select-item">
-                  <select title="filter" class="form-control" id="frooms">
-                    <option value="">Комнаты</option> 
-                    <?php 
-                    foreach($data["rooms"] as $rooms) : 
-                    $selected = (isset($_SESSION["query"]["rooms"]) && $_SESSION["query"]["rooms"]==$rooms["idx"]) ? 'selected="selected"' : '';
-                    ?>
-                    <option value="<?=$rooms["idx"]?>" <?=$selected?>><?=$rooms["title"]?></option> 
-                    <?php endforeach; ?>
-                  </select>
-                </section> 
-                <section class="col-sm-4 filter-select-item">
+                <section class="col-sm-3 filter-select-item">
                   <select title="filter" class="form-control" id="ftype">
                     <option value="">Тип недвижимости</option> 
                     <?php 
@@ -61,6 +62,17 @@ echo $data['headertop'];
                     <?php endforeach; ?>
                   </select>
                 </section>
+                <section class="col-sm-3 filter-select-item">
+                  <select title="filter" class="form-control" id="frooms">
+                    <option value="">Комнаты</option> 
+                    <?php 
+                    foreach($data["rooms"] as $rooms) : 
+                    $selected = (isset($_SESSION["query"]["rooms"]) && $_SESSION["query"]["rooms"]==$rooms["idx"]) ? 'selected="selected"' : '';
+                    ?>
+                    <option value="<?=$rooms["idx"]?>" <?=$selected?>><?=$rooms["title"]?></option> 
+                    <?php endforeach; ?>
+                  </select>
+                </section>                 
               </section> 
               <br> 
               <section class="row">
@@ -192,10 +204,9 @@ echo $data['headertop'];
                         <section class="col-sm-8">
                           <a href="/ru/view/<?=urlencode(strip_tags($item["title"]))?>/?id=<?=(int)$item["idx"]?>" style="color:white; text-decoration: none;">
                           <section class="flat-labels">
-                            <!-- <span><?=$item["sale_type"]?></span> -->
-                            <span><?=$item["type"]?></span>
+                            <span title="<?=htmlentities($item["type"])?>"><?=$string::cutstatic($item["type"], 8)?></span>
                             <span><?=$item["rooms"]?></span>
-                            <span data-ex="<?=$item["additional_data"]?>"><?=(int)@$spalni_explode?> Спальни</span>
+                            <span><?=(int)@$spalni_explode?> Спальни</span>
                             <span><?=(int)@$ploshad_explode?> м<sup>2</sup></span>
                             <span><?=(int)@$etaj_explode?>/<?=(int)@$totaletaj_explode?> зтаж</span>
                           </section> 
